@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="_template.xhtml">
+		<ui:define name="corpo">
+			<p:panel header="Lista de Usuários" toggleable="true">
+				<h:form>
+					<p:outputLabel value="Nome" for="nome"/>
+					<p:inputText value="#{listaUsuarioBean.nome}" id="nome"/>
+					<p:commandButton update="tabela" action="#{listaUsuarioBean.buscar()}" value="Buscar"/>
+				</h:form>
+				<p:dataTable id="tabela"
+					paginator="true" rows="5" paginatorPosition="bottom"
+					value="#{listaUsuarioBean.lista}" var="u">
+					<p:column headerText="Nome">
+						#{u.nome}
+					</p:column>
+					<p:column headerText="CPF">
+						#{u.cpf}
+					</p:column>
+					<p:column headerText="Data Nascimento">
+						<h:outputText value="#{u.dataNascimento.time}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Nível">
+						<p:rating value="#{u.nivel}" readonly="true"/>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</html>
