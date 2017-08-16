@@ -1,35 +1,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-	<ui:composition template="_template.xhtml">
-		<ui:define name="corpo">
-			<p:panel header="Cadastro de Usuário" toggleable="true">
-				<h:form>
-					<p:messages/>
-					<p:growl/>
-					<h:panelGrid columns="2">
+<ui:composition template="_template.xhtml">
+	<ui:define name="corpo">
+		<p:panel header="Cadastro de Usuário" toggleable="true">
+			<h:form>
+				<p:messages />
+				<p:growl />
+				<h:inputHidden value="#{usuarioBean.usuario.codigo}" />
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value="Nome" for="nome" />
+					<p:inputText value="#{usuarioBean.usuario.nome}" id="nome" />
+
+					<p:outputLabel value="CPF" for="cpf" />
+					<p:inputMask mask="999.999.999-99"
+						value="#{usuarioBean.usuario.cpf}" id="cpf" />
+
+					<p:outputLabel value="Data Nascimento" for="dt" />
+					<p:calendar pattern="dd/MM/yyyy" id="dt"
+						value="#{usuarioBean.usuario.dataNascimento.time}" />
+
+					<p:outputLabel value="Nível" for="nivel" />
+					<p:rating value="#{usuarioBean.usuario.nivel}" id="nivel" />
 					
-						<p:outputLabel value="Nome" for="nome"/>
-						<p:inputText value="#{usuarioBean.usuario.nome}" id="nome"/>
-						
-						<p:outputLabel value="CPF" for="cpf"/>
-						<p:inputMask mask="999.999.999-99" value="#{usuarioBean.usuario.cpf}" id="cpf"/>
-						
-						<p:outputLabel value="Data Nascimento" for="dt"/>
-						<p:calendar pattern="dd/MM/yyyy" id="dt"
-							value="#{usuarioBean.usuario.dataNascimento.time}"/>
-						
-						<p:outputLabel value="Nível" for="nivel"/>
-						<p:rating value="#{usuarioBean.usuario.nivel}" id="nivel"/>	
-						
-						<p:commandButton action="#{usuarioBean.cadastrar()}" value="Gravar"/>
-					</h:panelGrid>
-				</h:form>
-			</p:panel>
-		</ui:define>
-	</ui:composition>
+					<p:graphicImage id="foto2" value="#{usuarioBean.foto}" cache="false"/>
+					<p:fileUpload id="foto" sizeLimit="100000"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="false"
+						fileUploadListener="#{usuarioBean.subirFoto}" 
+						update="foto2"/>
+
+
+
+					<p:commandButton action="#{usuarioBean.cadastrar()}" value="Gravar" />
+				</h:panelGrid>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
 </html>

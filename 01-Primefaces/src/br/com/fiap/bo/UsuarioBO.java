@@ -81,10 +81,19 @@ public class UsuarioBO {
 		return dao.buscarPorNome(nome);
 	}
 	
+	public List<String> completaNomeCliente(String nome){
+		UsuarioDAO dao = new UsuarioDAOImpl(EntityManagerFactorySingleton.getInstance().createEntityManager());		
+		return  dao.buscaPorNomeUsuario(nome);
+	}
+	
+	public long buscarPorNivel(int nivel){
+		UsuarioDAO dao = new UsuarioDAOImpl(fabrica.createEntityManager());
+		return dao.buscarPorNivel(nivel);
+	}
+	
+	public long contarPorMesAniversario(int mes) {
+		UsuarioDAO dao = new UsuarioDAOImpl(fabrica.createEntityManager());
+		return dao.contarPorMesAniversario(mes);
+	}
+	
 }
-
-
-
-
-
-

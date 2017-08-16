@@ -8,5 +8,7 @@ public interface UsuarioDAO
 					extends GenericDAO<Usuario, Integer>{
 
 	List<Usuario> buscarPorNome(String nome);
-	
+	List<String> buscaPorNomeUsuario(String nome);	
+	long buscarPorNivel(int nivel);
+	long contarPorMesAniversario(int mes);
 }
