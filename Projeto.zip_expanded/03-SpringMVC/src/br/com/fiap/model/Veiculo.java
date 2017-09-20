@@ -1,10 +1,17 @@
 package br.com.fiap.model;
 
+import java.util.Calendar;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @SequenceGenerator(name="seqVeiculo", sequenceName="SQ_VEICULO", allocationSize=1)
@@ -14,10 +21,18 @@ public class Veiculo {
 	@GeneratedValue(generator="seqVeiculo", strategy=GenerationType.SEQUENCE)
 	private int codigo;
 	
+	@NotBlank	
 	private String modelo;
+	@NotBlank
 	private String marca;
 	private String cor;
+	
+	@NotBlank
+	@Size(max=7)
 	private String placa;
+	
+	@Max(Calendar.YEAR)
+	@Min(1900)
 	private int ano;
 
 	public String getModelo() {
