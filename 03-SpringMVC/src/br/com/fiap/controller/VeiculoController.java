@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.fiap.dao.FabricanteDAO;
 import br.com.fiap.dao.VeiculoDAO;
 import br.com.fiap.exception.IdNotFoundException;
 import br.com.fiap.model.Veiculo;
@@ -23,6 +24,9 @@ public class VeiculoController {
 	
 	@Autowired //Servidor vai injetar um objeto aqui
 	private VeiculoDAO dao;
+	
+	@Autowired
+	private FabricanteDAO daoFabricante;
 	
 	@Transactional
 	@PostMapping("excluir")
@@ -68,6 +72,7 @@ public class VeiculoController {
 	@GetMapping("cadastrar") //Abre a tela de formulário
 	public ModelAndView abrirForm(){
 		return new ModelAndView("veiculo/cadastro")
+							.addObject("lista", daoFabricante.listar())
 							.addObject("veiculo", new Veiculo());
 	}
 	
@@ -77,7 +82,7 @@ public class VeiculoController {
 		ModelAndView retorno;
 		
 		if(result.hasErrors()){
-			retorno = new ModelAndView("veiculo/cadastro");
+			retorno = new ModelAndView("veiculo/cadastro").addObject("lista", daoFabricante.listar());
 		}else{
 			try{
 				//Cadastrar no banco

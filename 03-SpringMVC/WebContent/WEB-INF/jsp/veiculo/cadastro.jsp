@@ -18,9 +18,14 @@
 		<c:url value="/veiculo/cadastrar" var="action"/>
 		<form:form action="${action}" method="post" commandName="veiculo">
 			<div class="form-group">
-				<form:label path="marca">Marca</form:label>
-				<form:input path="marca" cssClass="form-control"/>
-				<form:errors path="marca" cssClass="text-danger"/>
+				<form:label path="fabricante">Marca</form:label>
+				<form:select path="fabricante.codigo" cssClass="form-control">
+					<form:options items="${lista}" itemLabel="nome" itemValue="codigo"/>
+				</form:select>
+						
+				<!--<form:label path="marca">Marca</form:label>
+				<form:input path="marca" cssClass="form-control"/>				
+				<form:errors path="marca" cssClass="text-danger"/> -->
 			</div>	
 			<div class="form-group">
 				<form:label path="modelo">Modelo</form:label>

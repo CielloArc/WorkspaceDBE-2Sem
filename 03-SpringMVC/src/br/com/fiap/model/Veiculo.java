@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,6 +44,9 @@ public class Veiculo {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataFabricacao;
+	
+	@ManyToOne
+	private Fabricante fabricante;
 
 	public String getModelo() {
 		return modelo;
@@ -98,6 +102,14 @@ public class Veiculo {
 
 	public void setDataFabricacao(Calendar dataFabricacao) {
 		this.dataFabricacao = dataFabricacao;
+	}
+
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
 	}
 
 }
